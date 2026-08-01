@@ -1,25 +1,24 @@
 # Agent Skills 仓库
 
-本仓库存放 OpenClaw Agent 可复用的技能（SKILL.md 格式），按分类组织。
+OpenClaw Agent 可复用的技能库（SKILL.md 格式）。按核心内容合并为 4 个技能。
 
-## 分类结构
+## 技能索引
+
+| Skill | 分类 | 一句话说明 |
+|---|---|---|
+| [windows-desktop-dev](windows-dev/windows-desktop-dev/SKILL.md) | 桌面开发 | tkinter 暗色单窗口 UI + PyInstaller 打包 + 凭据管理器 + Inno Setup 一条龙 |
+| [github-publish](github/github-publish/SKILL.md) | GitHub | REST API 客户端 + SSH over 443 网络绕行 + 安全扫描 + 开源发布一条龙 |
+| [windows-data-migrate](windows-data-migrate/SKILL.md) | 系统管理 | Windows 数据目录 junction 迁移（应用无感知） |
+| [project-dev-log](project-dev-log/SKILL.md) | 流程 | 项目开发日志模板（二次开发参考） |
+
+## 结构
 
 ```
-skills/
-├── windows-dev/          # Windows 桌面工具开发
-│   ├── tkinter-dark-ui/        # tkinter 暗色单窗口 UI 模式
-│   ├── pyinstaller-packaging/  # PyInstaller 打包（含环境变量坑）
-│   ├── cred-manager/           # Windows 凭据管理器安全存储
-│   └── inno-setup-installer/   # Inno Setup 安装包制作
-├── github/               # GitHub 开发与发布
-│   ├── api-client/             # GitHub REST API 调用模式（重试/错误分类）
-│   ├── ssh-over-443/           # 国内网络绕行（SSH over 443 + 代理）
-│   └── open-source-release/    # 开源发布流程（安全扫描/tag/Release）
-├── windows-admin/        # Windows 系统管理
-│   ├── junction-migrate/       # 数据目录 junction 迁移
-│   └── secret-scan/            # 发布前敏感信息扫描
-└── workflow/             # 开发流程
-    └── project-dev-log/        # 项目开发日志模板（二次开发参考）
+openclaw-skills/
+├── windows-dev/windows-desktop-dev/SKILL.md   # 桌面工具开发一条龙
+├── github/github-publish/SKILL.md             # GitHub 访问与发布一条龙
+├── windows-data-migrate/SKILL.md              # 数据目录迁移
+└── project-dev-log/SKILL.md                   # 开发日志模板
 ```
 
 ## 使用方式
@@ -28,22 +27,12 @@ skills/
 复制到 agent 的 skills 根目录即可加载：
 
 ```bash
-# 本地加载示例（把某分类下的 skill 放进工作区）
-mkdir -p ~/.openclaw/workspace/skills/
-cp -r skills/windows-dev/pyinstaller-packaging ~/.openclaw/workspace/skills/
+# 示例：加载"桌面工具开发"技能
+cp -r windows-dev/windows-desktop-dev ~/.openclaw/workspace/skills/
 ```
 
-## 索引
+验证加载：`openclaw skills list`
 
-| Skill | 分类 | 一句话说明 |
-|---|---|---|
-| tkinter-dark-ui | windows-dev | tkinter 暗色主题 + 单窗口多页面（不弹窗） |
-| pyinstaller-packaging | windows-dev | PyInstaller 打包，含 TCL_LIBRARY 污染坑 |
-| cred-manager | windows-dev | Windows 凭据管理器存 token（ctypes） |
-| inno-setup-installer | windows-dev | Inno Setup 安装包（自定义目录/卸载） |
-| api-client | github | GitHub REST API 调用（重试/友好错误） |
-| ssh-over-443 | github | 国内访问 GitHub 绕行方案 |
-| open-source-release | github | 开源发布流程（安全红线/tag/Release） |
-| junction-migrate | windows-admin | Windows 数据目录 junction 迁移 |
-| secret-scan | windows-admin | 发布前敏感信息扫描 |
-| project-dev-log | workflow | 项目开发日志模板 |
+## 来源
+
+2026-08-01 开发 OpenClawConsole / GitHubConsole 两个桌面工具实战沉淀。
